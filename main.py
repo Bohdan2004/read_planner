@@ -36,10 +36,13 @@ def calspecial(date_v):
 def note_for_date():
     with open('CDict.json') as fo_2:
         cdict = json.load(fo_2)
+
     s_date = str(ui.calendarWidget.selectedDate())
     cdict[s_date] = ui.textEdit_7.toPlainText()
+
     if ui.textEdit_7.toPlainText() == '':
         del cdict[s_date]
+
     with open('CDict.json', 'w') as fo_3:
         json.dump(cdict, fo_3)
 
@@ -144,6 +147,7 @@ for key in books:
 
 with open('CDict.json') as fo:
     first_cdict = json.load(fo)
+
 for d, t in first_cdict.items():
     if d == str(ui.calendarWidget.selectedDate()):
         ui.textEdit_7.setText(t)
@@ -151,6 +155,7 @@ for d, t in first_cdict.items():
 
 with open('Challenge.json', 'r') as fo_4:
     tmp = json.load(fo_4)
+
 ui.textEdit_8.setText(tmp[0])
 ui.progressBar.setValue(tmp[1])
 
