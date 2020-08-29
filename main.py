@@ -3,14 +3,14 @@ import sys
 import webbrowser
 
 import requests
-from PyQt5.QtWidgets import QMessageBox, QLineEdit, QCheckBox
+from PyQt5.QtWidgets import QMessageBox, QLineEdit, QCheckBox, QWidget
 from bs4 import BeautifulSoup
 
 from Readplanner import *
 from Readplanner import Ui_widget
 
 app = QtWidgets.QApplication(sys.argv)
-widget = QtWidgets.QWidget()
+widget: QWidget = QtWidgets.QWidget()
 
 
 def link1():
@@ -135,9 +135,9 @@ def boost():
 
 widget.boost = boost
 
-soup = BeautifulSoup(requests.get('https://www.gutenberg.org/browse/scores/top').text, 'html.parser')
-books = {i.text: "https://www.gutenberg.org/" + BeautifulSoup(str(i), 'html.parser').find("a")["href"] for i in
-         soup.findAll("ol")[4].findAll("li")}
+soup: BeautifulSoup = BeautifulSoup(requests.get('https://www.gutenberg.org/browse/scores/top').text, 'html.parser')
+books: dict = {i.text: "https://www.gutenberg.org/" + BeautifulSoup(str(i), 'html.parser').find("a")["href"] for i in
+               soup.findAll("ol")[4].findAll("li")}
 
 ui: Ui_widget = Ui_widget()
 ui.setupUi(widget)
@@ -161,4 +161,3 @@ ui.progressBar.setValue(tmp[1])
 
 widget.show()
 sys.exit(app.exec_())
-
